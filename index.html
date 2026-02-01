@@ -2,74 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>For Carina 💕</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #ffe0e6;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0eb 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
         }
 
         .container {
             text-align: center;
             background: white;
-            padding: 60px 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            padding: 50px 35px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(233, 30, 99, 0.2);
+            max-width: 450px;
             width: 100%;
         }
 
         h1 {
             color: #e91e63;
-            font-size: 2.8rem;
+            font-size: 2rem;
             margin-bottom: 3rem;
             font-weight: 700;
+            line-height: 1.4;
         }
 
         .buttons-container {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             align-items: center;
             margin-top: 2rem;
+            min-height: 70px;
+            position: relative;
         }
 
         button {
-            font-size: 1.4rem;
-            padding: 20px 60px;
+            font-size: 1.25rem;
+            padding: 18px 45px;
             border: none;
-            border-radius: 12px;
+            border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
             font-family: inherit;
-            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         #yesBtn {
-            background: #e91e63;
+            background: linear-gradient(135deg, #ff6b9d 0%, #e91e63 100%);
             color: white;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        #yesBtn:hover {
-            background: #c2185b;
-            transform: scale(1.05);
+        #yesBtn:active {
+            transform: scale(0.95);
         }
 
         #noBtn {
-            background: #e0e0e0;
+            background: #f5f5f5;
             color: #666;
+            position: fixed;
+            transition: left 0.08s ease-out, top 0.08s ease-out;
+            will-change: transform;
         }
 
         .success {
@@ -78,52 +93,79 @@
 
         .success.show {
             display: block;
-            animation: fadeIn 0.6s ease;
+            animation: fadeIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         @keyframes fadeIn {
             from { 
                 opacity: 0; 
-                transform: scale(0.9); 
+                transform: scale(0.8) translateY(20px); 
             }
             to { 
                 opacity: 1; 
-                transform: scale(1); 
+                transform: scale(1) translateY(0); 
             }
         }
 
         .success h2 {
             color: #e91e63;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
             font-weight: 700;
         }
 
         .success img {
             max-width: 100%;
-            width: 400px;
-            border-radius: 12px;
-            margin: 2rem 0;
+            width: 100%;
+            max-width: 320px;
+            border-radius: 20px;
+            margin: 1.5rem auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         .success p {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: #333;
-            line-height: 1.8;
+            line-height: 1.6;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 450px) {
+            .container {
+                padding: 40px 25px;
+            }
+
             h1 {
-                font-size: 2rem;
+                font-size: 1.7rem;
+                margin-bottom: 2.5rem;
             }
             
             button {
-                font-size: 1.2rem;
+                font-size: 1.15rem;
                 padding: 16px 40px;
             }
             
-            .buttons-container {
-                flex-direction: column;
+            .success h2 {
+                font-size: 1.8rem;
+            }
+
+            .success p {
+                font-size: 1.15rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            button {
+                font-size: 1.05rem;
+                padding: 15px 35px;
+            }
+
+            .success h2 {
+                font-size: 1.6rem;
             }
         }
     </style>
@@ -140,7 +182,7 @@
 
         <div class="success" id="success-screen">
             <h2>LET'S GOOOOO! 🎉</h2>
-            <img src="<div class="tenor-gif-embed" data-postid="17373979177034149566" data-share-method="host" data-aspect-ratio="1.37363" data-width="100%"><a href="https://tenor.com/view/yeah-woo-woohoo-lets-goo-excited-gif-17373979177034149566">Yeah Woo Meme</a>from <a href="https://tenor.com/search/yeah-memes">Yeah Memes</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>" alt="Happy celebration">
+            <img src="https://media.tenor.com/pyNh01Knwa0AAAAM/shocked-black.gif" alt="Celebration">
             <p>I knew you'd say yes! ❤️<br>Can't wait to celebrate with you!</p>
         </div>
     </div>
@@ -150,75 +192,96 @@
         const noBtn = document.getElementById('noBtn');
         const questionScreen = document.getElementById('question-screen');
         const successScreen = document.getElementById('success-screen');
+        
+        let lastMoveTime = 0;
+        const moveThrottle = 50; // milliseconds
 
-        // Move the No button away from the cursor
-        function moveNoButton(e) {
-            const btnRect = noBtn.getBoundingClientRect();
-            const btnCenterX = btnRect.left + btnRect.width / 2;
-            const btnCenterY = btnRect.top + btnRect.height / 2;
-            
-            let mouseX, mouseY;
-            
-            if (e.type === 'touchstart' || e.type === 'touchmove') {
-                mouseX = e.touches[0].clientX;
-                mouseY = e.touches[0].clientY;
-            } else {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            }
+        // Position No button initially
+        function initNoButton() {
+            const yesRect = yesBtn.getBoundingClientRect();
+            noBtn.style.left = (yesRect.right + 20) + 'px';
+            noBtn.style.top = yesRect.top + 'px';
+        }
+
+        // Smooth escape function with throttling
+        function escapeNoButton(clientX, clientY) {
+            const now = Date.now();
+            if (now - lastMoveTime < moveThrottle) return;
+            lastMoveTime = now;
+
+            const noRect = noBtn.getBoundingClientRect();
+            const noCenterX = noRect.left + noRect.width / 2;
+            const noCenterY = noRect.top + noRect.height / 2;
             
             const distance = Math.sqrt(
-                Math.pow(mouseX - btnCenterX, 2) + 
-                Math.pow(mouseY - btnCenterY, 2)
+                Math.pow(clientX - noCenterX, 2) + 
+                Math.pow(clientY - noCenterY, 2)
             );
             
-            // If cursor gets within 100px, move the button away
-            if (distance < 100) {
-                const angle = Math.atan2(btnCenterY - mouseY, btnCenterX - mouseX);
-                const moveDistance = 150;
+            // Escape when within 120px
+            if (distance < 120) {
+                const angle = Math.atan2(noCenterY - clientY, noCenterX - clientX);
+                const escapeDistance = 180;
                 
-                let newX = btnCenterX + Math.cos(angle) * moveDistance;
-                let newY = btnCenterY + Math.sin(angle) * moveDistance;
+                let newX = noCenterX + Math.cos(angle) * escapeDistance;
+                let newY = noCenterY + Math.sin(angle) * escapeDistance;
                 
-                // Keep button within viewport
-                const margin = 80;
+                // Better boundary handling - add randomness near edges
+                const margin = 100;
+                const btnWidth = noRect.width;
+                const btnHeight = noRect.height;
+                
+                if (newX < margin || newX > window.innerWidth - margin) {
+                    newX = margin + Math.random() * (window.innerWidth - 2 * margin);
+                }
+                if (newY < margin || newY > window.innerHeight - margin) {
+                    newY = margin + Math.random() * (window.innerHeight - 2 * margin);
+                }
+                
+                // Final boundary check
                 newX = Math.max(margin, Math.min(window.innerWidth - margin, newX));
                 newY = Math.max(margin, Math.min(window.innerHeight - margin, newY));
                 
-                noBtn.style.position = 'fixed';
-                noBtn.style.left = (newX - btnRect.width / 2) + 'px';
-                noBtn.style.top = (newY - btnRect.height / 2) + 'px';
-                noBtn.style.transition = 'all 0.3s ease';
+                noBtn.style.left = (newX - btnWidth / 2) + 'px';
+                noBtn.style.top = (newY - btnHeight / 2) + 'px';
             }
         }
 
-        // Track mouse and touch movements
-        document.addEventListener('mousemove', moveNoButton);
-        document.addEventListener('touchmove', moveNoButton);
-        
-        // Also trigger on hover attempt
-        noBtn.addEventListener('mouseenter', (e) => moveNoButton(e));
-        noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            moveNoButton(e);
+        // Initialize after load
+        window.addEventListener('load', () => {
+            setTimeout(initNoButton, 100);
         });
 
-        // Yes button click
-        yesBtn.addEventListener('click', () => {
-            questionScreen.style.display = 'none';
-            successScreen.classList.add('show');
-        });
+        // Mouse tracking
+        let mouseMoveHandler = (e) => {
+            escapeNoButton(e.clientX, e.clientY);
+        };
 
-        // If somehow they click No (they won't!)
+        // Touch tracking
+        let touchMoveHandler = (e) => {
+            if (e.touches.length > 0) {
+                escapeNoButton(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        };
+
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('touchmove', touchMoveHandler, { passive: true });
+
+        // No button messages
         const noMessages = [
+            'No',
             'Are you sure?',
-            'Really?',
-            'Think again!',
-            'Are you certain?',
-            'Please reconsider!',
-            'One more chance!',
-            'Don\'t do this!',
-            'You sure about that?'
+            'Are you really sure??',
+            'I don\'t think this is the right button',
+            'I think you\'re looking for the yes button',
+            'Nope try again',
+            'Nope',
+            'Still not this one',
+            'QUE ESTE NO ES',
+            'Ok you really want to press this one',
+            'Well',
+            'Enserio?',
+            'Nope this isn\'t the one'
         ];
         let messageIndex = 0;
         
@@ -226,7 +289,17 @@
             e.preventDefault();
             noBtn.textContent = noMessages[messageIndex % noMessages.length];
             messageIndex++;
-            moveNoButton(e);
+            escapeNoButton(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY);
+        });
+
+        // Yes button
+        yesBtn.addEventListener('click', () => {
+            // Remove event listeners for performance
+            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener('touchmove', touchMoveHandler);
+            
+            questionScreen.style.display = 'none';
+            successScreen.classList.add('show');
         });
     </script>
 </body>
