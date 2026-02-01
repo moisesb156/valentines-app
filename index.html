@@ -15,7 +15,9 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #ffeef8 0%, #ffe0eb 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -27,22 +29,68 @@
             height: 100%;
         }
 
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating hearts background */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: floatUp 8s infinite ease-in;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         .container {
             text-align: center;
             background: white;
-            padding: 50px 35px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(233, 30, 99, 0.2);
-            max-width: 450px;
+            padding: 60px 40px;
+            border-radius: 40px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            max-width: 480px;
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
             color: #e91e63;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 3rem;
-            font-weight: 700;
-            line-height: 1.4;
+            font-weight: 800;
+            line-height: 1.3;
+            text-shadow: 0 2px 10px rgba(233, 30, 99, 0.2);
+            letter-spacing: -0.5px;
         }
 
         .buttons-container {
@@ -53,26 +101,48 @@
             margin-top: 2rem;
             min-height: 70px;
             position: relative;
+            z-index: 2;
         }
 
         button {
-            font-size: 1.25rem;
-            padding: 18px 45px;
+            font-size: 1.3rem;
+            padding: 20px 50px;
             border: none;
-            border-radius: 50px;
+            border-radius: 60px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             font-family: inherit;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             touch-action: manipulation;
             -webkit-user-select: none;
             user-select: none;
+            letter-spacing: 0.5px;
         }
 
         #yesBtn {
-            background: linear-gradient(135deg, #ff6b9d 0%, #e91e63 100%);
+            background: linear-gradient(135deg, #ff6b9d 0%, #c74b7c 100%);
             color: white;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #yesBtn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        #yesBtn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         #yesBtn:active {
@@ -85,6 +155,7 @@
             position: fixed;
             transition: left 0.08s ease-out, top 0.08s ease-out;
             will-change: transform;
+            z-index: 100;
         }
 
         .success {
@@ -93,84 +164,115 @@
 
         .success.show {
             display: block;
-            animation: fadeIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: successPop 1s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        @keyframes fadeIn {
-            from { 
+        @keyframes successPop {
+            0% { 
                 opacity: 0; 
-                transform: scale(0.8) translateY(20px); 
+                transform: scale(0.3) rotate(-10deg); 
             }
-            to { 
+            50% {
+                transform: scale(1.05) rotate(2deg);
+            }
+            100% { 
                 opacity: 1; 
-                transform: scale(1) translateY(0); 
+                transform: scale(1) rotate(0deg); 
             }
         }
 
         .success h2 {
             color: #e91e63;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
+            font-size: 2.3rem;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(233, 30, 99, 0.2);
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .success img {
             max-width: 100%;
             width: 100%;
-            max-width: 320px;
-            border-radius: 20px;
-            margin: 1.5rem auto;
+            max-width: 350px;
+            border-radius: 25px;
+            margin: 2rem auto;
             display: block;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(233, 30, 99, 0.2);
         }
 
         .success p {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        /* Confetti animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b9d;
+            position: absolute;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         @media (max-width: 450px) {
             .container {
-                padding: 40px 25px;
+                padding: 45px 30px;
             }
 
             h1 {
-                font-size: 1.7rem;
+                font-size: 1.8rem;
                 margin-bottom: 2.5rem;
             }
             
             button {
-                font-size: 1.15rem;
-                padding: 16px 40px;
+                font-size: 1.2rem;
+                padding: 18px 45px;
             }
             
             .success h2 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             .success p {
-                font-size: 1.15rem;
+                font-size: 1.2rem;
             }
         }
 
         @media (max-width: 380px) {
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
 
             button {
-                font-size: 1.05rem;
-                padding: 15px 35px;
+                font-size: 1.1rem;
+                padding: 16px 38px;
             }
 
             .success h2 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="hearts-bg" id="hearts-bg"></div>
+    
     <div class="container">
         <div id="question-screen">
             <h1>💌 Carina, will you be my Valentine? 💕</h1>
@@ -182,7 +284,7 @@
 
         <div class="success" id="success-screen">
             <h2>LET'S GOOOOO! ❣️</h2>
-            <img src="https://media.tenor.com/8RzGAp4nbr4AAAAM/yeah-woo.gif">
+            <img src="https://media.tenor.com/8RzGAp4nbr4AAAAM/yeah-woo.gif" alt="Celebration">
             <p>I knew you'd say yes! 🙂‍↕️<br>Can't wait to celebrate with you!💐</p>
         </div>
     </div>
@@ -192,18 +294,36 @@
         const noBtn = document.getElementById('noBtn');
         const questionScreen = document.getElementById('question-screen');
         const successScreen = document.getElementById('success-screen');
+        const heartsBg = document.getElementById('hearts-bg');
+        
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            heartsBg.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 8000);
+        }
+        
+        // Generate hearts
+        for (let i = 0; i < 8; i++) {
+            setTimeout(createHeart, i * 1000);
+        }
+        setInterval(createHeart, 2000);
         
         let lastMoveTime = 0;
-        const moveThrottle = 50; // milliseconds
+        const moveThrottle = 50;
 
-        // Position No button initially
         function initNoButton() {
             const yesRect = yesBtn.getBoundingClientRect();
             noBtn.style.left = (yesRect.right + 20) + 'px';
             noBtn.style.top = yesRect.top + 'px';
         }
 
-        // Smooth escape function with throttling
         function escapeNoButton(clientX, clientY) {
             const now = Date.now();
             if (now - lastMoveTime < moveThrottle) return;
@@ -218,7 +338,6 @@
                 Math.pow(clientY - noCenterY, 2)
             );
             
-            // Escape when within 120px
             if (distance < 120) {
                 const angle = Math.atan2(noCenterY - clientY, noCenterX - clientX);
                 const escapeDistance = 180;
@@ -226,7 +345,6 @@
                 let newX = noCenterX + Math.cos(angle) * escapeDistance;
                 let newY = noCenterY + Math.sin(angle) * escapeDistance;
                 
-                // Better boundary handling - add randomness near edges
                 const margin = 100;
                 const btnWidth = noRect.width;
                 const btnHeight = noRect.height;
@@ -238,7 +356,6 @@
                     newY = margin + Math.random() * (window.innerHeight - 2 * margin);
                 }
                 
-                // Final boundary check
                 newX = Math.max(margin, Math.min(window.innerWidth - margin, newX));
                 newY = Math.max(margin, Math.min(window.innerHeight - margin, newY));
                 
@@ -247,17 +364,14 @@
             }
         }
 
-        // Initialize after load
         window.addEventListener('load', () => {
             setTimeout(initNoButton, 100);
         });
 
-        // Mouse tracking
         let mouseMoveHandler = (e) => {
             escapeNoButton(e.clientX, e.clientY);
         };
 
-        // Touch tracking
         let touchMoveHandler = (e) => {
             if (e.touches.length > 0) {
                 escapeNoButton(e.touches[0].clientX, e.touches[0].clientY);
@@ -267,7 +381,6 @@
         document.addEventListener('mousemove', mouseMoveHandler);
         document.addEventListener('touchmove', touchMoveHandler, { passive: true });
 
-        // No button messages
         const noMessages = [
             'No',
             'Are you sure?',
@@ -292,14 +405,26 @@
             escapeNoButton(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY);
         });
 
-        // Yes button
         yesBtn.addEventListener('click', () => {
-            // Remove event listeners for performance
             document.removeEventListener('mousemove', mouseMoveHandler);
             document.removeEventListener('touchmove', touchMoveHandler);
             
             questionScreen.style.display = 'none';
             successScreen.classList.add('show');
+            
+            // Create confetti burst
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = ['#ff6b9d', '#c74b7c', '#ffd700', '#ff69b4'][Math.floor(Math.random() * 4)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
         });
     </script>
 </body>
